@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+nav a {
+    @apply font-medium relative text-sm sm:text-lg hover:after:w-full;
+}
+
+nav a.active::after {
+    width: 100%;
+}
+
+nav ul li a::after {
+    content: '';
+    @apply absolute w-0 rounded-full -mb-2 left-0 bottom-0 h-[2px] md:h-1 bg-transparent bg-gradient-to-tr from-indigo-400 to-blue-700;
+}
+
+main .input {
+    @apply px-2 py-3 bg-white/10 rounded-md focus:ring-2 focus:ring-blue-500 outline-none;
+}
+
+#hero-illustration {
+    animation: gravity 3000ms infinite ease-in-out;
+}
+
+@keyframes gravity {
+    from {transform: translateY(0);}
+    25% {transform: translateY(4px);}
+    50% {transform: translateY(0);}
+    to {transform: translateY(-4px);}
+}
