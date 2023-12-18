@@ -19,10 +19,21 @@ export default function LoginUser() {
             const response = await axios.post('http://localhost:8000/login', {
                 email: email,
                 password: password,
+            }, {
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                withCredentials: true
             });
-            // localStorage.setItem('accessToken', response.data.accessToken)
-            axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
-            history("/join");
+            if(response.status === 200){
+                // localStorage.setItem('accessToken', response.data.accessToken)
+                axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.accessToken}`;
+                history("/join");
+
+            }else{
+                setMsg(response.response.data.msg);
+                setPassword('');
+            }
         } catch (error) {
             if (error.response){
                 setMsg(error.response.data.msg);
@@ -45,7 +56,7 @@ export default function LoginUser() {
                 </div>
 
                 <h1 className="font-semibold text-2xl my-6">Welcome to Upvote Books</h1>
-                <p className='text-center'>{msg}</p>
+                <p className='text-center text-red-500 mb-4'>{msg}</p>
                 
 
                 <label htmlFor="email" className="text-sm">

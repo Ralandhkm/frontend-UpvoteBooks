@@ -7,9 +7,7 @@ import { useEffect } from 'react';
 export default function Home() {
     const getUser = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/user', {
-                email:'satrio@gmail.com'
-            })
+            const response = await axios.get('http://localhost:8000/user/satrio@gmail.com')
             console.log(response.data);
         } catch (error) {
             console.error(error);
